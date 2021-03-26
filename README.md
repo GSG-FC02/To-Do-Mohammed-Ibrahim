@@ -13,6 +13,7 @@ ToDo list is a simple web application to save Your daily tasks in order not to m
 * Set task priority
 * Edit task
 * Delete single task
+* Rearrange option (Up & Down)
 
 # Technologies used:
 
