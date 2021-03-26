@@ -21,4 +21,4 @@ ToDo list is a simple web application to save Your daily tasks in order not to m
 * CSS
 * JavaScript (DOM, Local Stage)
 
-Visit Our App web site: https://gsg-fc02.github.io/To-Do-Mohammed-Ibrahim/
+### **Visit Our App web site:** https://gsg-fc02.github.io/To-Do-Mohammed-Ibrahim/
