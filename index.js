@@ -6,6 +6,7 @@ const itemList = document.querySelector("#itemList");
 const messageDiv = document.querySelector("#message");
 const clearButton = document.querySelector("#clearBtn");
 const filters = document.querySelectorAll(".nav-item");
+var tabType;
 
 // create empty item list
 let todoItems = [];
@@ -53,6 +54,20 @@ const removeItem = function (item) {
   todoItems.splice(removeIndex, 1);
 };
 
+// up the item
+const upItem = function (item) {
+  const selectIndex = todoItems.indexOf(item);
+  if(todoItems[selectIndex-1]){
+  [todoItems[selectIndex],todoItems[selectIndex-1]]=[todoItems[selectIndex-1],todoItems[selectIndex]];
+}};
+// down the item
+const downItem = function (item) {
+  const selectIndex = todoItems.indexOf(item);
+  if(todoItems[selectIndex+1]){
+  [todoItems[selectIndex],todoItems[selectIndex+1]]=[todoItems[selectIndex+1],todoItems[selectIndex]];
+}};
+
+
 //bi-check-circle-fill  // bi-check-circle
 // handle item
 const handleItem = function (itemData) {
@@ -89,6 +104,28 @@ const handleItem = function (itemData) {
         document.querySelector("#citem").value = todoItems.indexOf(itemData);
         return todoItems;
       });
+      //up
+      item
+        .querySelector("[data-up]")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+            upItem(itemData);
+            setLocalStorage(todoItems);
+            getItemsFilter(tabType);
+            return todoItems;
+          
+        });
+
+        //down
+        item
+        .querySelector("[data-down]")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+            downItem(itemData);
+            setLocalStorage(todoItems);
+            getItemsFilter(tabType);
+            return todoItems;
+        });
 
       //delete
       item
@@ -119,6 +156,8 @@ const getList = function (todoItems) {
         `<li class="list-group-item d-flex justify-content-between align-items-center">
           <span class="title" data-time="${item.addedAt}">${item.name}</span> 
           <span>
+              <a href="#" data-up><i class="bi bi-arrow-up-circle"></i></a>
+              <a href="#" data-down><i class="bi bi-arrow-down-circle"></i></a>
               <a href="#" data-done><i class="bi ${iconClass} green"></i></a>
               <a href="#" data-edit><i class="bi bi-pencil-square blue"></i></a>
               <a href="#" data-delete><i class="bi bi-x-circle red"></i></a>
@@ -191,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
   filters.forEach((tab) => {
     tab.addEventListener("click", function (e) {
       e.preventDefault();
-      const tabType = this.getAttribute("data-type");
+      tabType = this.getAttribute("data-type");
       document.querySelectorAll(".nav-link").forEach((nav) => {
         nav.classList.remove("active");
       });
