@@ -134,7 +134,7 @@ const handleItem = function (itemData) {
           e.preventDefault();
           if (confirm("Are you sure want to delete?")) {
             itemList.removeChild(item);
-            removeItem(item);
+            removeItem(itemData);
             setLocalStorage(todoItems);
             showAlert("Item has been deleted.", "alert-success");
             return todoItems.filter((item) => item != itemData);
